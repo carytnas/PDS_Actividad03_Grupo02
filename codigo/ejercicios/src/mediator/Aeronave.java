@@ -2,26 +2,28 @@ package mediator;
 
 public abstract class Aeronave {
 
-	protected String identificador;
-	protected ITorreControl torreControl;
+	protected final String identificador;
+	protected final ITorreControl torreControl;
 	protected boolean autorizada = false;
 
 	public Aeronave(String identificador, ITorreControl torreControl) {
 		this.identificador = identificador;
-		this.torreControl = torreControl;		
-		torreControl.registrarAeronave(this); 
+		this.torreControl = torreControl;
 	}
 
 	public String getIdentificador() {
 		return identificador;
 	}
 
-	public void solicitarAutorizacion() {
-		torreControl.solicitarAterrizaje(this);
+	public boolean isAutorizada() {
+		return autorizada;
 	}
 
-	public void reportarPosicion() {
-		System.out.println("[" + identificador + "] Reportando posición actual en el espacio aéreo.");
+	// La torre consulta este valor para decidir en qué cola ubica la solicitud.
+	public abstract boolean esPrioritaria();
+
+	public void solicitarAutorizacion() {
+		torreControl.solicitarAterrizaje(this);
 	}
 
 	// Llamado por la torre (Mediator) cuando concede la pista a esta aeronave.
@@ -30,11 +32,19 @@ public abstract class Aeronave {
 		System.out.println("[" + identificador + "] Autorización recibida. Procediendo al aterrizaje.");
 	}
 
-	// Llamado por la torre (Mediator) cuando la pista está ocupada.
+	// Llamado por la torre (Mediator) cuando la pista está ocupada o cambia el orden de la cola.
 	public void recibirEspera(int posicion) {
 		autorizada = false;
 		System.out.println("[" + identificador + "] En patrón de espera (posición " + posicion + " en la cola).");
 	}
 
-	public abstract void aterrizarYLiberar();
+	public void aterrizarYLiberar() {
+		if (!autorizada) {
+			System.out.println("[" + identificador + "] Sin autorización de la torre: no puede aterrizar.");
+			return;
+		}
+		System.out.println("[" + identificador + "] Realizando maniobra de aterrizaje...");
+		autorizada = false;
+		torreControl.liberarPista(this);
+	}
 }
