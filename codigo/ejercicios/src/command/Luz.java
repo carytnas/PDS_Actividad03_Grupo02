@@ -3,10 +3,10 @@ package command;
 public class Luz {
 
 	public void encender() {
-		System.out.println("-> [Luz] El dispositivo est· ENCENDIDO.");
+		System.out.println("-> [Luz] El dispositivo est√° ENCENDIDO.");
 	}
 
 	public void apagar() {
-		System.out.println("-> [Luz] El dispositivo est· APAGADO.");
+		System.out.println("-> [Luz] El dispositivo est√° APAGADO.");
 	}
 }

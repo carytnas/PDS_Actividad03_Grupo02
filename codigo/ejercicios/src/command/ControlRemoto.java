@@ -9,7 +9,7 @@ public class ControlRemoto {
 
 	public void presionarBoton() {
 		if (comando == null) {
-			System.out.println("No hay ningún comando asignado en el control remoto.");
+			System.out.println("No hay ningÃºn comando asignado en el control remoto.");
 			return;
 		}
 		comando.ejecutar(); 
