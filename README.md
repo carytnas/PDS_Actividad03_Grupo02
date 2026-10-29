@@ -4,12 +4,18 @@ Actividad 03 de Patrones de Diseño de Software (Maestría en Software, UPS): pa
 
 Grupo 02: Espinoza Adrian, Jara Pablo, Lara Miguel, Torres Carina, Uyaguari Sebastián.
 
+## Escenarios
+
+- **Mediator – Torre de control.** Una torre coordina el uso de una única pista entre varias aeronaves. Los vuelos regulares se atienden por orden de llegada y los vuelos sanitarios tienen prioridad. Las aeronaves no se conocen entre sí: solo hablan con la torre.
+- **Command – Control remoto domótico.** Un control con varios botones acciona la luz y el ventilador de una sala de reuniones. Cada botón guarda un comando que se puede reasignar en ejecución, el control lleva un historial para deshacer y una escena ("Modo presentación") agrupa varios comandos en uno.
+
 ## Estructura
 
 | Ruta | Contenido |
 | --- | --- |
-| `codigo/ejercicios/src/mediator` | Mediator: torre de control que coordina el aterrizaje de varias aeronaves en una pista |
-| `codigo/ejercicios/src/command` | Command: control remoto que enciende y apaga una luz |
+| `codigo/ejercicios/src/mediator` | Mediator: torre de control, aeronaves comerciales y sanitarias |
+| `codigo/ejercicios/src/command` | Command: control remoto, comandos de luz y ventilador, macrocomando y deshacer |
+| `codigo/ejercicios/test` | Pruebas unitarias (JUnit 5) de ambos patrones |
 | `Diagramas/Mediator-Command.drawio` | Diagramas UML: original (sin patrón) y aplicado de cada patrón |
 | `documentacion/` | Informe y presentación |
 
@@ -23,4 +29,10 @@ java -cp bin mediator.MainMediatorTorreControl
 java -cp bin command.MainCommandControlLuces
 ```
 
-También se puede importar `codigo/ejercicios` como proyecto de Eclipse.
+Pruebas unitarias (requiere Maven):
+
+```bash
+mvn test
+```
+
+También se puede importar `codigo/ejercicios` en Eclipse como proyecto Java (las pruebas usan la biblioteca JUnit 5 incluida en Eclipse) o como proyecto Maven.
