@@ -4,6 +4,7 @@ public abstract class Aeronave {
 
 	protected String identificador;
 	protected ITorreControl torreControl;
+	protected boolean autorizada = false;
 
 	public Aeronave(String identificador, ITorreControl torreControl) {
 		this.identificador = identificador;
@@ -20,7 +21,19 @@ public abstract class Aeronave {
 	}
 
 	public void reportarPosicion() {
-		System.out.println("[" + identificador + "] Reportando posici髇 actual en el espacio a閞eo.");
+		System.out.println("[" + identificador + "] Reportando posici贸n actual en el espacio a茅reo.");
+	}
+
+	// Llamado por la torre (Mediator) cuando concede la pista a esta aeronave.
+	public void recibirAutorizacion() {
+		autorizada = true;
+		System.out.println("[" + identificador + "] Autorizaci贸n recibida. Procediendo al aterrizaje.");
+	}
+
+	// Llamado por la torre (Mediator) cuando la pista est谩 ocupada.
+	public void recibirEspera(int posicion) {
+		autorizada = false;
+		System.out.println("[" + identificador + "] En patr贸n de espera (posici贸n " + posicion + " en la cola).");
 	}
 
 	public abstract void aterrizarYLiberar();
