@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class TorreControlConcreta implements ITorreControl {
-	
+
 	private List<Aeronave> listaAeronaves = new ArrayList<Aeronave>();
 	private Queue<Aeronave> colaEspera = new LinkedList<Aeronave>();
 	private Aeronave aeronaveEnPista = null;
